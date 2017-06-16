@@ -3,8 +3,35 @@ html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        text-align: center;
       }
 
       #map {
         height: 100%;
       }
+
+      #locationsList {
+        height: 100%;
+        width: 20%;
+        float: left;
+        display: inline-block;
+        text-align: center;
+      }
+
+      #listFilter {
+        margin-top: 5%;
+        width: 100%;
+        text-align: center;
+      }
+
+      h2 {
+        text-align: center;
+        color: green;
+      }
+
+      ul {
+        padding: 0;
+      }
+
+
+

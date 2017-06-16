@@ -1,40 +1,18 @@
-var marker_locations = [
-        {
-            name:
-            clicks:
-        },
-        {
-            name:
-            clicks:
-        },
-        {
-            name:
-            clicks:
-        },
-        {
-            name:
-            clicks:
-        },
-        {
-            name:
-            clicks:
-        }
-        ]
 
-var Location = function(data) {
-    var self = this
-
-    this.name = ko.observable(data.name);
+var Location = function (data) {
+    this.name = data.name;
     this.clickCount = ko.observable(data.clicks);
 
 }
 
 var ViewModel = function() {
+    var self = this;
+
     this.locations = ko.observableArray([]);
 
-    locations.foreach(function(location_entry) {
-        self.locations.push( new Location(location_entry) );
+    mapLocations.forEach(function(location) {
+        self.locations.push( new Location(location) );
     });
-}
+};
 
 ko.applyBindings(new ViewModel());
