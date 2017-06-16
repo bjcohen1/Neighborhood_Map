@@ -1,8 +1,7 @@
 
 var Location = function (data) {
     this.name = data.name;
-    this.clickCount = ko.observable(data.clicks);
-
+    this.marker = data.marker;
 }
 
 var ViewModel = function() {
@@ -13,6 +12,10 @@ var ViewModel = function() {
     mapLocations.forEach(function(location) {
         self.locations.push( new Location(location) );
     });
+
+    self.clickedName = function () {
+        console.log(this.marker);
+    }
 };
 
 ko.applyBindings(new ViewModel());

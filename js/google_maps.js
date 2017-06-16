@@ -4,26 +4,27 @@ var mapLocations = [
     {
      name:'Louisville Slugger Bat Factory',
      LatLng: {lat: 38.2570969, lng: -85.7449177},
-     description:'Test1'
+     description:'Test1',
     },
     {
      name:'Churchill Downs Racetrack',
      LatLng: {lat: 38.2029725, lng: -85.772227},
-     description:'Test2'
+     description:'Test2',
     },
     {name: 'Muhammad Ali Center',
      LatLng: {lat: 38.2582229, lng: -85.7620477},
-     description: 'Test3'
+     description: 'Test3',
     },
     {
       name:'Louisville International Airport',
       LatLng: {lat: 38.175662, lng: -85.7391118},
-      description: 'Test4'
+      description: 'Test4',
     },
     {
       name:'Belle of Louisville',
       LatLng: {lat: 38.259186, lng: -85.7577707},
-      description: 'Test5'}
+      description: 'Test5',
+    }
     ];
 
       function initMap() {
@@ -36,7 +37,7 @@ var mapLocations = [
         //use marker to show the listing
 
         var infowindow = new google.maps.InfoWindow();
-        var marker, i;
+        var i, marker;
 
         var highlightedIcon = makeMarkerIcon('FFFF24');
 
@@ -50,6 +51,8 @@ var mapLocations = [
             title: title,
             animation: google.maps.Animation.DROP
           });
+
+          mapLocations[i].marker = marker;
 
         // Add a closure on the event listener to assign unique values to
         // each of the markers instead of the value of the last one falling through
@@ -67,6 +70,8 @@ var mapLocations = [
               this.setIcon(highlightedIcon);
             }
           }(marker, i)
+
+
 
         function makeMarkerIcon(markerColor) {
         var markerImage = new google.maps.MarkerImage(
