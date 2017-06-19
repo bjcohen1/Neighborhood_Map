@@ -32,7 +32,7 @@ var mapLocations = [
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 38.2570969, lng: -85.7449177},
           zoom: 12
-        });
+      });
 
         //use marker to show the listing
 
@@ -40,6 +40,7 @@ var mapLocations = [
         var i, marker;
 
         var highlightedIcon = makeMarkerIcon('FFFF24');
+        var markerSet = [];
 
         for (i = 0; i < mapLocations.length; i++) {
           var position = new google.maps.LatLng(mapLocations[i].LatLng);
@@ -52,26 +53,39 @@ var mapLocations = [
             animation: google.maps.Animation.DROP
           });
 
-          mapLocations[i].marker = marker;
+          markerSet.push(marker);
+          mapLocations[i].marker = markerSet[i];
 
         // Add a closure on the event listener to assign unique values to
         // each of the markers instead of the value of the last one falling through
         // Thanks to stack exchange for some help with the details!
         // https://stackoverflow.com/questions/3059044/google-maps-js-api-v3-simple-multiple-marker-example
           google.maps.event.addListener(marker, 'click', clickMarker(marker, i))
+          google.maps.event.addListener(infowindow, 'closeclick', showMarkers)
         };
+
+        console.log(markerSet);
 
         function clickMarker(marker, i) {
           return function () {
+              for (var y = 0; y < markerSet.length; y++) {
+                markerSet[y].setMap(null);
+              }
+              markerSet[i].setMap(map);
               infowindow.setContent(mapLocations[i].description);
               infowindow.open(map, marker);
               // this line will change color and style of marker when clicked, need to add function to
               // keep track of when a specific icon is clicked or not clicked
-              this.setIcon(highlightedIcon);
+              marker.setAnimation(google.maps.Animation.BOUNCE);
             }
           }(marker, i)
 
-
+        function showMarkers() {
+          for (var y = 0; y < markerSet.length; y++) {
+            markerSet[y].setIcon("https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png");
+            markerSet[y].setMap(map);
+          }
+        }
 
         function makeMarkerIcon(markerColor) {
         var markerImage = new google.maps.MarkerImage(
