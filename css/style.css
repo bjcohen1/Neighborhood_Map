@@ -33,5 +33,9 @@ html, body {
         padding: 0;
       }
 
+      .places {
+        cursor: pointer;
+      }
+
 
 

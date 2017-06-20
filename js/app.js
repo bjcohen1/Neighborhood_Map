@@ -1,8 +1,8 @@
 
-var Location = function (data) {
+/*var Location = function (data) {
     this.name = ko.observable(data.name);
     this.marker = data.marker;
-}
+}*/
 
 var ViewModel = function() {
     var self = this;
@@ -11,7 +11,6 @@ var ViewModel = function() {
 
     this.clickedOn = function (location) {
         google.maps.event.trigger(location.marker, 'click');
-        console.log(this.marker);
     }
 
     this.filter = ko.observable("");
@@ -19,13 +18,21 @@ var ViewModel = function() {
     this.filteredItems = ko.computed(function() {
         var filter = self.filter().toLowerCase();
         if (!filter) {
+            for (i = 0; i < this.locations().length; i++) {
+                this.locations()[i].marker.setVisible(true);
+            }
             return self.locations();
         } else {
            return ko.utils.arrayFilter(self.locations(), function(item) {
-                return item.name().toLowerCase().indexOf(filter()) > -1;
+                var results = item.name.toLowerCase().indexOf(filter) > -1;
+                if (results == true) {
+                    item.marker.setVisible(true);
+                } else {
+                    item.marker.setVisible(false);
+                }
+            return results
             });
         }
     }, self);
 }
 
-ko.applyBindings(new ViewModel());

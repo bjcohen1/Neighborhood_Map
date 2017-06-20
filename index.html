@@ -10,10 +10,9 @@
             <h2> Locations on Your Map </h2>
             <div id ="listFilter">
                 <input type = "text" data-bind = "value: filter, valueUpdate: 'afterkeydown'"" placeholder = "Filter Maps Results Here">
-                <input type = "button" value="Submit" id="filter-button">
             </div>
-            <ul data-bind = "foreach: locations">
-                 <li data-bind ="text: $data.name, click: $parent.clickedOn"></li>
+            <ul data-bind = "foreach: filteredItems">
+                 <li class = "places" data-bind ="text: $data.name, click: $parent.clickedOn"></li>
             </ul>
         </div>
 

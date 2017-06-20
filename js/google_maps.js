@@ -5,25 +5,30 @@ var mapLocations = [
      name:'Louisville Slugger Bat Factory',
      LatLng: {lat: 38.2570969, lng: -85.7449177},
      description:'Test1',
+     locationID: '4b4261d2f964a520c3d225e3'
     },
     {
      name:'Churchill Downs Racetrack',
      LatLng: {lat: 38.2029725, lng: -85.772227},
      description:'Test2',
+     locationID: '4b0933a7f964a520b31423e3'
     },
     {name: 'Muhammad Ali Center',
      LatLng: {lat: 38.2582229, lng: -85.7620477},
      description: 'Test3',
+     locationID: '4b3134f0f964a5209b0225e3'
     },
     {
       name:'Louisville International Airport',
       LatLng: {lat: 38.175662, lng: -85.7391118},
       description: 'Test4',
+      locationID: '4b0363e8f964a5201f4f22e3'
     },
     {
       name:'Belle of Louisville',
       LatLng: {lat: 38.259186, lng: -85.7577707},
       description: 'Test5',
+      locationID: '4ba7d023f964a5208fb539e3'
     }
     ];
 
@@ -39,7 +44,6 @@ var mapLocations = [
         var infowindow = new google.maps.InfoWindow();
         var i, marker;
 
-        var highlightedIcon = makeMarkerIcon('FFFF24');
         var markerSet = [];
 
         for (i = 0; i < mapLocations.length; i++) {
@@ -64,14 +68,16 @@ var mapLocations = [
           google.maps.event.addListener(infowindow, 'closeclick', showMarkers)
         };
 
-        console.log(markerSet);
+        function clearMarkers() {
+          for (var i = 0; i < mapLocations.length; i++) {
+                mapLocations[i].marker.setVisible(false);
+              }
+        }
 
         function clickMarker(marker, i) {
           return function () {
-              for (var y = 0; y < markerSet.length; y++) {
-                markerSet[y].setMap(null);
-              }
-              markerSet[i].setMap(map);
+              clearMarkers();
+              mapLocations[i].marker.setVisible(true);
               infowindow.setContent(mapLocations[i].description);
               infowindow.open(map, marker);
               // this line will change color and style of marker when clicked, need to add function to
@@ -81,20 +87,22 @@ var mapLocations = [
           }(marker, i)
 
         function showMarkers() {
-          for (var y = 0; y < markerSet.length; y++) {
-            markerSet[y].setIcon("https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png");
-            markerSet[y].setMap(map);
+          for (var i = 0; i < mapLocations.length; i++) {
+            mapLocations[i].marker.setAnimation(null);
+            mapLocations[i].marker.setVisible(true);
           }
         }
 
-        function makeMarkerIcon(markerColor) {
-        var markerImage = new google.maps.MarkerImage(
-          'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|'+ markerColor +
-          '|40|_|%E2%80%A2',
-          new google.maps.Size(21, 34),
-          new google.maps.Point(0, 0),
-          new google.maps.Point(10, 34),
-          new google.maps.Size(21,34));
-        return markerImage;
-      }
+        function loadFourSquare() {
+          var clientID = "PJAU3L5FYIPZLSZ0O0IMD45X0FQUAR2ZXCOW2CSF1KZEZAZLW0NGOWLYTBQWBIFYQ4KXNLPOMYCDFW3I5JPUKNUDI1TI3BIZ";
+          var clientSecret = "D45X0FQUAR2ZXCOW2CSF1KZEZAZLW0NGOWLYTBQWBIFYQ4KX";
+          var v = "20170619";
+          var m = "foursquare";
+
+          for (i = 0; i < mapLocations.length; i++) {
+            var fourSquareUrl = "https://api.foursquare.com/v2/venues/" +
+            mapLocations[i].venueID + "client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET + "&v=" + v;
+        }
+        }
+        ko.applyBindings(new ViewModel());
     }
