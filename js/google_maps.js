@@ -38,9 +38,10 @@ var mapLocations = [
         map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 38.2570969, lng: -85.7449177},
           zoom: 12
-      });
+        });
 
-        //use marker to show the listing
+        var toggle = document.getElementById('open-btn');
+        map.controls[google.maps.ControlPosition.LEFT_TOP].push(toggle);
 
         var i, marker, position, title, fourSquareUrl, infowindow;
 
@@ -78,6 +79,10 @@ var mapLocations = [
 
         console.log(mapLocations[1].fourSquareUrl);
 
+        google.maps.event.addDomListener(window, 'resize', function() {
+          map.setCenter(map.center);
+        });
+
         function clearMarkers() {
           for (var i = 0; i < mapLocations.length; i++) {
                 mapLocations[i].marker.setVisible(false);
@@ -88,17 +93,29 @@ var mapLocations = [
           return function () {
             clearMarkers();
             infowindow.setContent(null);
-            mapLocations[i].marker.setVisible(true);
 
             $.ajax({
-              //url: "https://api.foursquare.com/v2/venues/4b4261d2f964a520c3d225e3?client_id=PJAU3L5FYIPZLSZ0O0IMNLPOMYCDFW3I5JPUKNUDI1TI3BIZ&client_secret=D45X0FQUAR2ZXCOW2CSF1KZEZAZLW0NGOWLYTBQWBIFYQ4KX&v=20170101&m=foursquare",
               url: mapLocations[i].fourSquareUrl,
               success: function(data) {
+                var venueData = data.response.venue;
+                var name = venueData.name;
+                var website = venueData.url;
+                var telephone = venueData.contact.phone;
+                var rating = venueData.rating;
+                var fourSquareInfo = venueData.canonicalUrl + "?ref=" + clientID;
+                contentData = "<div class = infowindow>Name: <a href =" + fourSquareInfo+ ">" + name + "</a><br> Website: <a href =" + website + ">" + website +
+                "</a> <br> Phone Number: " + telephone + "<br> FourSquare Rating: " + rating +
+                "<br> <img src = images/PBF300.png alt = Powered by FourSquare></div>"
                 console.log(data.response);
-              infowindow.setContent(data.response.venue.name);
-              }
+                infowindow.setContent(contentData);
+              },
+              error: function(jqXHR, string) {
+                infowindow.setContent("FourSquare Data Failed To Load, Sorry About That!");
+              },
+              timeout: 5000
             });
 
+            marker.setVisible(true);
             infowindow.open(map, marker);
             marker.setAnimation(google.maps.Animation.BOUNCE);
           }
@@ -111,5 +128,6 @@ var mapLocations = [
           }
         }
 
+        //window.alert("Failed to load map. We'll do our best to get it up and running for you!")
         ko.applyBindings(new ViewModel());
     }
