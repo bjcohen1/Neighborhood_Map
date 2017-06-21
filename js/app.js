@@ -8,7 +8,7 @@ var ViewModel = function() {
     //as if the marker for the location was clicked
     this.clickedOn = function (location) {
         google.maps.event.trigger(location.marker, 'click');
-    }
+    };
 
     //implement the filter functionality
     //use an internal knockout function, arrayFilter, to check
@@ -30,13 +30,13 @@ var ViewModel = function() {
         } else {
            return ko.utils.arrayFilter(self.locations(), function(item) {
                 var results = item.name.toLowerCase().indexOf(filter) > -1;
-                if (results == true) {
+                if (results === true) {
                     item.marker.setVisible(true);
                 } else {
                     item.marker.setVisible(false);
                 }
-            return results
+            return results;
             });
         }
     }, self);
-}
+};
