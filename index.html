@@ -26,15 +26,15 @@
         <script src = "js/app.js"></script>
         <script>
             function openFilter() {
-                document.getElementById("locationsList").style.width = "25%";
+                document.getElementById("locationsList").style.width = "100%";
             }
 
             function closeFilter() {
-                document.getElementById("locationsList").style.width = "0";
+                document.getElementById("locationsList").style.width = "0%";
             }
         </script>
-        <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnVouRxSZ2ujVVBHjjAnSOzjbyOOZHzwE&v=3&libraries=places&callback=initMap">
+        <script defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnVouRxSZ2ujVVBHjjAnSOzjbyOOZHzwE&v=3&libraries=places&callback=initMap" onerror = "mapFail()">
         </script>
     </body>
 
