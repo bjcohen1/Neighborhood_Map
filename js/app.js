@@ -40,3 +40,11 @@ var ViewModel = function() {
         }
     }, self);
 };
+
+function openFilter() {
+    document.getElementById("locationsList").style.width = "100%";
+}
+
+function closeFilter() {
+    document.getElementById("locationsList").style.width = "0%";
+}

@@ -1,78 +1,76 @@
 html, body {
-        font-family: Arial, sans-serif;
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
+    font-family: Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-      #map {
-        height: 100%;
-      }
+#map {
+    height: 100%;
+}
 
-      #locationsList {
-        height: 100%;
-        width: 20%;
-        float: left;
-        display: inline-block;
-      }
+#locationsList {
+    height: 100%;
+    width: 20%;
+    float: left;
+    display: inline-block;
+}
 
-      #listFilter {
-        margin-top: 5%;
-        width: 100%;
-        text-align: center;
-      }
+#listFilter {
+    margin-top: 5%;
+    width: 100%;
+    text-align: center;
+}
 
-      h2 {
-        text-align: center;
-        color: green;
-      }
+h2 {
+    text-align: center;
+    color: green;
+}
 
-      ul {
-        padding: 0;
-        text-align: center
-      }
+ul {
+    padding: 0;
+    text-align: center
+}
 
-      .places {
-        cursor: pointer;
-        display: block;
-      }
+.places {
+    cursor: pointer;
+    display: block;
+}
 
-      img {
-        width: 50%;
-      }
+img {
+    width: 50%;
+}
 
-      h3 {
-        display: none;
-        cursor: default;
-        text-align: right;
-        margin-left: 90%;
-        margin-top: 5%;
-        opacity: 0.5;
-      }
+h3 {
+    display: none;
+    cursor: default;
+    text-align: right;
+    margin-left: 90%;
+    margin-top: 5%;
+    opacity: 0.5;
+}
 
-      #open-btn {
-        display: none;
-      }
+#open-btn {
+    display: none;
+}
 
-      .infowindow {
-        text-align: center;
-      }
+.infowindow {
+    text-align: center;
+}
 
 @media only screen and (max-width: 500px) {
-      #locationsList {
+    #locationsList {
         width: 0;
-      }
+    }
 
-      #open-btn {
+    #open-btn {
         display: inline;
         width: 50px;
         height: 25px;
         margin-left: 10px;
-      }
-
-      h3 {
-        display: inline;
-      }
     }
 
-
+    h3 {
+      display: inline;
+    }
+}
