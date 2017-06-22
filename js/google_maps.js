@@ -100,7 +100,7 @@ function initMap() {
   function closeWindow (marker) {
     return function () {
       marker.setAnimation(null);
-    }
+    };
   } (marker);
 
   function stopBouncing() {
