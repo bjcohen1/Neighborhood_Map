@@ -3,32 +3,32 @@
 <html>
     <head>
         <title>Louisville Points of Interest</title>
-        <link rel = "stylesheet" type = "text/css" href = "css/style.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
     </head>
 
     <body>
-        <div id = "locationsList">
-            <h3 id = "close-btn" onClick = "closeFilter()">  X </h3>
+        <div id="locationsList">
+            <h3 id="close-btn" onClick="closeFilter()">  X </h3>
             <h2> Locations on Your Map </h2>
-            <div id ="listFilter">
-                <input type = "text" data-bind = "value: filter, valueUpdate: 'afterkeydown'" placeholder = "Filter Maps Results Here">
-            </div>
-            <ul data-bind = "foreach: filteredItems">
-                 <li class = "places" data-bind ="text: $data.name, click: $parent.clickedOn"></li>
+            <aside id="listFilter">
+                <input type="text" data-bind="value: filter, valueUpdate: 'afterkeydown'" placeholder="Filter Maps Results Here">
+            </aside>
+            <ul data-bind="foreach: filteredItems">
+                 <li class="places" data-bind="text: $data.name, click: $parent.clickedOn"></li>
             </ul>
         </div>
 
-        <div id = "map"></div>
-        <div id = "open-btn"> <button type = "submit" onClick = "openFilter()"> Filter Results </button> </div>
+        <main id="map"></main>
+        <div id="open-btn"> <button type="submit" onClick="openFilter()"> Filter Results </button> </div>
 
         <script src="js/lib/knockout-3.2.0.js"></script>
         <script src="js/lib/jquery.min.js"></script>
         <script src="js/locations.js"></script>
-        <script src = "js/google_maps.js"></script>
-        <script src = "js/app.js"></script>
+        <script src="js/google_maps.js"></script>
+        <script src="js/app.js"></script>
         <script defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnVouRxSZ2ujVVBHjjAnSOzjbyOOZHzwE&v=3&libraries=places&callback=initMap" onerror = "mapFail()">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDnVouRxSZ2ujVVBHjjAnSOzjbyOOZHzwE&v=3&libraries=places&callback=initMap" onerror="mapFail()">
         </script>
     </body>
 </html>

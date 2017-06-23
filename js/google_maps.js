@@ -59,13 +59,17 @@ function initMap() {
   });
 
   //Function to set infowindow content from the FourSquare API and open infowindows when clicked
-  var venueData, name, website, telephone, rating, fourSquareInfo;
+  var venueData, name, website, telephone, rating, fourSquareInfo, previousMarker;
 
   function clickMarker(marker, i) {
     return function () {
-      //Also need to provide for markers to stop bouncing in case a user clicks from marker to marker without
+     //Also need to provide for markers to stop bouncing in case a user clicks from marker to marker without
      //closing the infowindow explicitly
-      stopBouncing();
+      if (previousMarker && previousMarker != marker) {
+        previousMarker.setAnimation(null);
+      } else {
+        previousMarker = marker;
+      }
 
       infowindow.setContent(null);
 
@@ -92,8 +96,9 @@ function initMap() {
         timeout: 5000
       });
 
-      infowindow.open(map, marker);
       marker.setAnimation(google.maps.Animation.BOUNCE);
+      infowindow.open(map, marker);
+      previousMarker =  marker;
     };
   } (marker, i);
 
@@ -102,12 +107,6 @@ function initMap() {
       marker.setAnimation(null);
     };
   } (marker);
-
-  function stopBouncing() {
-    for (var i = 0; i <mapLocations.length; i++) {
-      mapLocations[i].marker.setAnimation(null);
-    }
-  }
 
   ko.applyBindings(new ViewModel());
 }
